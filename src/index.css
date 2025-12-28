@@ -1,96 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Amruth Organic Honey - Premium Design System
+   All colors in HSL for proper theming */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Premium Honey Color Palette */
+    --background: 40 33% 97%;
+    --foreground: 30 20% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 40 40% 99%;
+    --card-foreground: 30 20% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 40 40% 99%;
+    --popover-foreground: 30 20% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Golden Honey Primary */
+    --primary: 42 76% 55%;
+    --primary-foreground: 30 20% 10%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Warm Cream Secondary */
+    --secondary: 40 45% 94%;
+    --secondary-foreground: 30 25% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Forest Green Accent */
+    --accent: 152 35% 30%;
+    --accent-foreground: 40 40% 98%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Amber Muted */
+    --muted: 38 30% 90%;
+    --muted-foreground: 30 15% 40%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 38 25% 85%;
+    --input: 38 25% 88%;
+    --ring: 42 76% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Premium Custom Colors */
+    --honey-gold: 42 76% 55%;
+    --honey-dark: 35 80% 40%;
+    --honey-light: 43 70% 75%;
+    --amber: 38 90% 50%;
+    --amber-glow: 38 100% 60%;
+    --forest: 152 35% 30%;
+    --forest-light: 152 25% 45%;
+    --cream: 40 45% 96%;
+    --cream-dark: 38 30% 88%;
+    --earth: 30 25% 25%;
+    --earth-light: 30 20% 35%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Glass Effects */
+    --glass-bg: 40 40% 99% / 0.8;
+    --glass-border: 40 30% 90% / 0.5;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Shadows */
+    --shadow-honey: 42 76% 55% / 0.25;
+    --shadow-dark: 30 20% 10% / 0.15;
 
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar (keeping for compatibility) */
+    --sidebar-background: 40 45% 96%;
+    --sidebar-foreground: 30 20% 20%;
+    --sidebar-primary: 42 76% 55%;
+    --sidebar-primary-foreground: 30 20% 10%;
+    --sidebar-accent: 152 35% 30%;
+    --sidebar-accent-foreground: 40 40% 98%;
+    --sidebar-border: 38 25% 85%;
+    --sidebar-ring: 42 76% 55%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 30 20% 8%;
+    --foreground: 40 30% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 30 18% 12%;
+    --card-foreground: 40 30% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 30 18% 12%;
+    --popover-foreground: 40 30% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 42 76% 55%;
+    --primary-foreground: 30 20% 10%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 30 15% 18%;
+    --secondary-foreground: 40 30% 90%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 152 40% 40%;
+    --accent-foreground: 40 40% 98%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --muted: 30 15% 20%;
+    --muted-foreground: 38 20% 60%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 30 15% 20%;
+    --input: 30 15% 22%;
+    --ring: 42 76% 55%;
+
+    --honey-gold: 42 76% 55%;
+    --honey-dark: 35 80% 45%;
+    --honey-light: 43 60% 65%;
+    --amber: 38 90% 55%;
+    --amber-glow: 38 100% 65%;
+    --forest: 152 40% 40%;
+    --forest-light: 152 30% 55%;
+    --cream: 40 20% 20%;
+    --cream-dark: 38 15% 15%;
+    --earth: 30 20% 85%;
+    --earth-light: 30 15% 70%;
+
+    --glass-bg: 30 18% 12% / 0.9;
+    --glass-border: 30 15% 25% / 0.5;
+
+    --shadow-honey: 42 76% 55% / 0.3;
+    --shadow-dark: 0 0% 0% / 0.4;
+
+    --sidebar-background: 30 18% 10%;
+    --sidebar-foreground: 40 30% 90%;
+    --sidebar-primary: 42 76% 55%;
+    --sidebar-primary-foreground: 30 20% 10%;
+    --sidebar-accent: 152 40% 40%;
+    --sidebar-accent-foreground: 40 40% 98%;
+    --sidebar-border: 30 15% 20%;
+    --sidebar-ring: 42 76% 55%;
   }
 }
 
@@ -99,7 +139,133 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
+  html {
+    scroll-behavior: smooth;
   }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    @apply font-medium tracking-tight;
+  }
+}
+
+@layer components {
+  /* Premium Glass Card */
+  .glass-card {
+    @apply backdrop-blur-xl border;
+    background: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+  }
+
+  /* Honey Glow Effect */
+  .honey-glow {
+    box-shadow: 0 0 60px hsl(var(--shadow-honey)),
+                0 0 120px hsl(var(--shadow-honey));
+  }
+
+  /* Premium Button Styles */
+  .btn-honey {
+    @apply px-8 py-4 rounded-full font-medium transition-all duration-500;
+    background: linear-gradient(135deg, hsl(var(--honey-gold)), hsl(var(--amber)));
+    color: hsl(var(--earth));
+    box-shadow: 0 10px 40px hsl(var(--shadow-honey));
+  }
+
+  .btn-honey:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 50px hsl(var(--shadow-honey)),
+                0 0 30px hsl(var(--amber-glow) / 0.4);
+  }
+
+  .btn-forest {
+    @apply px-8 py-4 rounded-full font-medium transition-all duration-500;
+    background: linear-gradient(135deg, hsl(var(--forest)), hsl(var(--forest-light)));
+    color: hsl(var(--cream));
+  }
+
+  .btn-forest:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px hsl(var(--forest) / 0.3);
+  }
+
+  /* Premium Text Gradient */
+  .text-honey-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--honey-gold)), hsl(var(--amber)), hsl(var(--honey-dark)));
+  }
+
+  /* Elegant underline animation */
+  .hover-underline {
+    @apply relative;
+  }
+
+  .hover-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 origin-right scale-x-0 transition-transform duration-500;
+    background: linear-gradient(90deg, hsl(var(--honey-gold)), hsl(var(--amber)));
+  }
+
+  .hover-underline:hover::after {
+    @apply origin-left scale-x-100;
+  }
+
+  /* Section spacing */
+  .section-padding {
+    @apply py-24 md:py-32 lg:py-40 px-6 md:px-12 lg:px-20;
+  }
+
+  /* Premium container */
+  .container-premium {
+    @apply max-w-7xl mx-auto;
+  }
+}
+
+@layer utilities {
+  /* Smooth scroll snap */
+  .scroll-smooth-section {
+    scroll-snap-type: y mandatory;
+  }
+
+  .snap-section {
+    scroll-snap-align: start;
+  }
+
+  /* Text shadow for readability on images */
+  .text-shadow-lg {
+    text-shadow: 0 4px 20px hsl(var(--shadow-dark));
+  }
+
+  /* Premium spacing */
+  .spacing-section {
+    @apply my-20 md:my-32 lg:my-40;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--cream-dark));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--honey-gold)), hsl(var(--amber)));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--honey-dark));
+}
+
+/* Selection color */
+::selection {
+  background: hsl(var(--honey-gold) / 0.3);
+  color: hsl(var(--earth));
 }
