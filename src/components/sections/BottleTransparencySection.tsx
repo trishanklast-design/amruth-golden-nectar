@@ -71,12 +71,28 @@ const BottleTransparencySection = () => {
           className="max-w-3xl mx-auto mb-16 md:mb-20"
         >
           <div className="bg-cream/50 rounded-2xl p-8 md:p-10 border border-honey/10">
-            <p className="text-foreground/80 text-lg md:text-xl leading-relaxed text-center">
+            <p className="text-foreground/80 text-lg md:text-xl leading-relaxed text-center mb-6">
               We believe trust should be <span className="font-semibold text-foreground">visible</span> — not just claimed.
               That's why every bottle of our honey is individually recorded during the final stages 
               of filling, labeling, and packaging. Each bottle carries its own unique identity, 
               ensuring complete traceability from our hands to yours.
             </p>
+            
+            {/* Sample Bottle Number Badge */}
+            <div className="flex justify-center">
+              <div className="inline-flex flex-col items-center gap-2">
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">Sample Bottle ID</span>
+                <div className="relative">
+                  <div className="bg-background border-2 border-honey/30 rounded-lg px-5 py-3 shadow-soft">
+                    <span className="font-mono text-lg md:text-xl font-semibold text-honey-dark tracking-widest">
+                      AMH-2024-00847
+                    </span>
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-forest rounded-full border-2 border-background" />
+                </div>
+                <span className="text-xs text-muted-foreground">Each bottle has a unique code like this</span>
+              </div>
+            </div>
           </div>
         </motion.div>
 
