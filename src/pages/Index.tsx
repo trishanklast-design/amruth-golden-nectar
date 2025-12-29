@@ -7,6 +7,7 @@ import ProductsSection from '@/components/sections/ProductsSection';
 import LabReportsSection from '@/components/sections/LabReportsSection';
 import WhyChooseSection from '@/components/sections/WhyChooseSection';
 import PurityChallengeSection from '@/components/sections/PurityChallengeSection';
+import BottleTransparencySection from '@/components/sections/BottleTransparencySection';
 
 const Index = () => {
   return (
@@ -19,6 +20,7 @@ const Index = () => {
         <ProductsSection />
         <WhyChooseSection />
         <PurityChallengeSection />
+        <BottleTransparencySection />
         <LabReportsSection />
       </main>
       <Footer />
