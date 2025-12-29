@@ -82,13 +82,14 @@ const BottleTransparencySection = () => {
             <div className="flex justify-center">
               <div className="inline-flex flex-col items-center gap-2">
                 <span className="text-xs text-muted-foreground uppercase tracking-wider">Sample Bottle ID</span>
-                <div className="relative">
-                  <div className="bg-background border-2 border-honey/30 rounded-lg px-5 py-3 shadow-soft">
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-honey/30 to-transparent rounded-lg animate-shimmer" style={{ backgroundSize: '200% 100%' }} />
+                  <div className="relative bg-background border-2 border-honey/30 rounded-lg px-5 py-3 shadow-soft overflow-hidden">
                     <span className="font-mono text-lg md:text-xl font-semibold text-honey-dark tracking-widest">
                       AMH-2024-00847
                     </span>
                   </div>
-                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-forest rounded-full border-2 border-background" />
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-forest rounded-full border-2 border-background animate-pulse" />
                 </div>
                 <span className="text-xs text-muted-foreground">Each bottle has a unique code like this</span>
               </div>
