@@ -2,19 +2,18 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ShoppingBag } from 'lucide-react';
+import { useCart } from '@/contexts/CartContext';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Products', href: '#products' },
-  { name: 'Our Process', href: '#process' },
-  { name: 'Lab Reports', href: '#lab-reports' },
+  { name: 'Home', href: '/', isPage: true },
+  { name: 'Products', href: '/products', isPage: true },
   { name: 'Contact', href: '/contact', isPage: true },
 ];
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { totalItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,69 +38,63 @@ const Navigation = () => {
         <div className="container-premium">
           <div className="flex items-center justify-between h-20 md:h-24 px-6">
             {/* Logo */}
-            <motion.a
-              href="#home"
+            <Link
+              to="/"
               className="flex items-center gap-3"
-              whileHover={{ scale: 1.02 }}
             >
-              <div className="w-12 h-12 rounded-full bg-honey-gradient flex items-center justify-center shadow-lg">
-                <span className="text-2xl">🍯</span>
-              </div>
-              <div className="hidden sm:block">
-                <h1 className="font-serif text-xl md:text-2xl font-semibold text-foreground">
-                  Amruth
-                </h1>
-                <p className="text-xs text-muted-foreground tracking-widest uppercase">
-                  Organic Honey
-                </p>
-              </div>
-            </motion.a>
+              <motion.div whileHover={{ scale: 1.02 }} className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-honey-gradient flex items-center justify-center shadow-lg">
+                  <span className="text-2xl">🍯</span>
+                </div>
+                <div className="hidden sm:block">
+                  <h1 className="font-serif text-xl md:text-2xl font-semibold text-foreground">
+                    Amruth
+                  </h1>
+                  <p className="text-xs text-muted-foreground tracking-widest uppercase">
+                    Organic Honey
+                  </p>
+                </div>
+              </motion.div>
+            </Link>
 
+            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
-                'isPage' in link && link.isPage ? (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors hover-underline py-2"
-                  >
-                    {link.name}
-                  </Link>
-                ) : (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors hover-underline py-2"
-                  >
-                    {link.name}
-                  </a>
-                )
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors hover-underline py-2"
+                >
+                  {link.name}
+                </Link>
               ))}
             </div>
 
             {/* Right side actions */}
             <div className="flex items-center gap-4">
               {/* Cart */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative p-2 rounded-full hover:bg-secondary transition-colors"
-              >
-                <ShoppingBag className="w-5 h-5 text-foreground" />
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center font-medium">
-                  0
-                </span>
-              </motion.button>
+              <Link to="/products">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative p-2 rounded-full hover:bg-secondary transition-colors"
+                >
+                  <ShoppingBag className="w-5 h-5 text-foreground" />
+                  {totalItems > 0 && (
+                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center font-medium">
+                      {totalItems}
+                    </span>
+                  )}
+                </motion.div>
+              </Link>
 
               {/* CTA Button */}
-              <motion.a
-                href="#products"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <Link
+                to="/products"
                 className="hidden md:block btn-honey text-sm py-3 px-6"
               >
                 Shop Now
-              </motion.a>
+              </Link>
 
               {/* Mobile menu button */}
               <button
@@ -144,46 +137,35 @@ const Navigation = () => {
               </div>
               <div className="flex flex-col gap-4">
                 {navLinks.map((link, index) => (
-                  'isPage' in link && link.isPage ? (
-                    <motion.div
-                      key={link.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Link
-                        to={link.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors py-3 border-b border-border block"
-                      >
-                        {link.name}
-                      </Link>
-                    </motion.div>
-                  ) : (
-                    <motion.a
-                      key={link.name}
-                      href={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link
+                      to={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors py-3 border-b border-border"
+                      className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors py-3 border-b border-border block"
                     >
                       {link.name}
-                    </motion.a>
-                  )
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
-              <motion.a
-                href="#products"
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="btn-honey w-full text-center mt-8 block"
               >
-                Shop Now
-              </motion.a>
+                <Link
+                  to="/products"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="btn-honey w-full text-center mt-8 block"
+                >
+                  Shop Now
+                </Link>
+              </motion.div>
             </motion.div>
           </>
         )}
