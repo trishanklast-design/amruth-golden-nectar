@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 
@@ -8,8 +9,7 @@ const navLinks = [
   { name: 'Products', href: '#products' },
   { name: 'Our Process', href: '#process' },
   { name: 'Lab Reports', href: '#lab-reports' },
-  { name: 'Blog', href: '#blog' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Contact', href: '/contact', isPage: true },
 ];
 
 const Navigation = () => {
@@ -57,16 +57,25 @@ const Navigation = () => {
               </div>
             </motion.a>
 
-            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors hover-underline py-2"
-                >
-                  {link.name}
-                </a>
+                'isPage' in link && link.isPage ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors hover-underline py-2"
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors hover-underline py-2"
+                  >
+                    {link.name}
+                  </a>
+                )
               ))}
             </div>
 
@@ -135,17 +144,34 @@ const Navigation = () => {
               </div>
               <div className="flex flex-col gap-4">
                 {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.name}
-                    href={link.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors py-3 border-b border-border"
-                  >
-                    {link.name}
-                  </motion.a>
+                  'isPage' in link && link.isPage ? (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Link
+                        to={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors py-3 border-b border-border block"
+                      >
+                        {link.name}
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <motion.a
+                      key={link.name}
+                      href={link.href}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors py-3 border-b border-border"
+                    >
+                      {link.name}
+                    </motion.a>
+                  )
                 ))}
               </div>
               <motion.a
