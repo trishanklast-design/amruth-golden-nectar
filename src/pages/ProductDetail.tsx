@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -34,8 +34,26 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const buyButtonsRef = useRef<HTMLDivElement>(null);
 
   const product = getProductBySlug(slug || '');
+
+  // Intersection Observer to detect when buy buttons are out of view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickyBar(!entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: '-80px 0px 0px 0px' }
+    );
+
+    if (buyButtonsRef.current) {
+      observer.observe(buyButtonsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [product]);
 
   if (!product) {
     return (
@@ -336,7 +354,7 @@ const ProductDetail = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex gap-4 mb-6">
+                <div ref={buyButtonsRef} className="flex gap-4 mb-6">
                   <motion.div className="flex-1" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button 
                       onClick={handleAddToCart}
@@ -644,6 +662,69 @@ const ProductDetail = () => {
       </main>
 
       <Footer />
+
+      {/* Sticky Add to Cart Bar - Mobile Only */}
+      <AnimatePresence>
+        {showStickyBar && product && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed bottom-0 left-0 right-0 z-50 lg:hidden"
+          >
+            <div className="bg-background/95 backdrop-blur-xl border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
+              <div className="container mx-auto px-4 py-3">
+                <div className="flex items-center gap-3">
+                  {/* Product Info */}
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cream to-secondary flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl">{product.image}</span>
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-medium text-sm truncate">{product.name}</p>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-foreground">₹{product.price}</span>
+                        <span className="text-xs text-muted-foreground line-through">₹{product.originalPrice}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Quantity Controls */}
+                  <div className="flex items-center border border-border rounded-lg">
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="p-2 hover:bg-secondary transition-colors"
+                    >
+                      <Minus className="w-3 h-3" />
+                    </button>
+                    <span className="px-3 text-sm font-medium">{quantity}</span>
+                    <button
+                      onClick={() => setQuantity(quantity + 1)}
+                      className="p-2 hover:bg-secondary transition-colors"
+                    >
+                      <Plus className="w-3 h-3" />
+                    </button>
+                  </div>
+
+                  {/* Add to Cart Button */}
+                  <Button 
+                    onClick={handleAddToCart}
+                    className="btn-honey px-4 py-2 text-sm font-semibold"
+                    disabled={addedToCart}
+                  >
+                    {addedToCart ? (
+                      <Check className="w-4 h-4" />
+                    ) : (
+                      <ShoppingCart className="w-4 h-4" />
+                    )}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
