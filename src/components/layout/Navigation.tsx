@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
-
+import CartDrawer from '@/components/CartDrawer';
 const navLinks = [
   { name: 'Home', href: '/', isPage: true },
   { name: 'Products', href: '/products', isPage: true },
@@ -73,8 +73,8 @@ const Navigation = () => {
             {/* Right side actions */}
             <div className="flex items-center gap-4">
               {/* Cart */}
-              <Link to="/products">
-                <motion.div
+              <CartDrawer>
+                <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="relative p-2 rounded-full hover:bg-secondary transition-colors"
@@ -85,8 +85,8 @@ const Navigation = () => {
                       {totalItems}
                     </span>
                   )}
-                </motion.div>
-              </Link>
+                </motion.button>
+              </CartDrawer>
 
               {/* CTA Button */}
               <Link
