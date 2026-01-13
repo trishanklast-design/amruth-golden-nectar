@@ -7,6 +7,7 @@ import CartDrawer from '@/components/CartDrawer';
 const navLinks = [
   { name: 'Home', href: '/', isPage: true },
   { name: 'Products', href: '/products', isPage: true },
+  { name: 'Our Difference', href: '/our-difference', isPage: true },
   { name: 'Contact', href: '/contact', isPage: true },
 ];
 
