@@ -4,6 +4,7 @@ import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import ProductsSection from '@/components/sections/ProductsSection';
+import DifferenceSection from '@/components/sections/DifferenceSection';
 import LabReportsSection from '@/components/sections/LabReportsSection';
 import WhyChooseSection from '@/components/sections/WhyChooseSection';
 import PurityChallengeSection from '@/components/sections/PurityChallengeSection';
@@ -19,6 +20,7 @@ const Index = () => {
         <AboutSection />
         <ProcessSection />
         <ProductsSection />
+        <DifferenceSection />
         <WhyChooseSection />
         <PurityChallengeSection />
         <BottleTransparencySection />
